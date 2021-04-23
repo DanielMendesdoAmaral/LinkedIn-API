@@ -7,10 +7,10 @@
         public string Mensagem { get; private set; }
         public object Dados { get; private set; }
 
-        public GenericQueryResult(int statusCode, bool sucesso, string mensagem, object dados)
+        public GenericQueryResult(int statusCode, string mensagem, object dados)
         {
             StatusCode = statusCode;
-            Sucesso = statusCode != 200 ? false : true;
+            Sucesso = statusCode == 200;
             Mensagem = mensagem;
             Dados = dados;
         }

@@ -1,4 +1,7 @@
+using Domain.Handlers.Queries.VagaHandlers;
+using Domain.Repositories;
 using Infrastructure.Data.Context;
+using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +43,10 @@ namespace Api
             });
 
             services.AddDbContext<LinkedInContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IVagaRepository, VagaRepository>();
+
+            services.AddTransient<ListarVagasHandler, ListarVagasHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
