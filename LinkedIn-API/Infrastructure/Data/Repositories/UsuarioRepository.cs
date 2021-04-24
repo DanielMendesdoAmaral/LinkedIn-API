@@ -6,20 +6,20 @@ using System.Linq;
 
 namespace Infrastructure.Data.Repositories
 {
-    public class VagaRepository : IVagaRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
-        private LinkedInContext _context { get; }
+        private RadarContext _context { get; }
 
-        public VagaRepository(LinkedInContext context)
+        public UsuarioRepository(RadarContext context)
         {
             _context = context;
         }
 
-        public List<Vaga> Listar()
+        public List<Usuario> Listar()
         {
             return 
                 _context
-                .Vagas
+                .Usuarios
                 .ToList();
         }
     }

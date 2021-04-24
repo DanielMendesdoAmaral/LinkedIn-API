@@ -1,6 +1,7 @@
-USE LinkedIn;
-SELECT * FROM Vagas;
+USE Radar;
+SELECT * FROM Usuarios;
 
-USE LinkedIn;
-INSERT INTO Vagas VALUES
-(NEWID(), 'Desenvolvedor Back-End', 'Desenvolver APIs RESTFul utilizando .Net Core', 1000, GETDATE())
+USE Radar;
+INSERT INTO Usuarios VALUES
+(NEWID(), 'Lauro', 'lauro@email.com', '-23.618810', 0, GETDATE());
+SELECT * FROM Usuarios;

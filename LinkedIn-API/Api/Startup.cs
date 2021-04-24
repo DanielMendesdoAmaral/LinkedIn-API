@@ -1,4 +1,5 @@
-using Domain.Handlers.Queries.VagaHandlers;
+using Api.Hubs;
+using Domain.Handlers.Queries.UsuarioHandlers;
 using Domain.Repositories;
 using Infrastructure.Data.Context;
 using Infrastructure.Data.Repositories;
@@ -42,11 +43,13 @@ namespace Api
                                   });
             });
 
-            services.AddDbContext<LinkedInContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RadarContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IVagaRepository, VagaRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-            services.AddTransient<ListarVagasHandler, ListarVagasHandler>();
+            services.AddTransient<ListarUsuariosHandler, ListarUsuariosHandler>();
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,7 +59,7 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -67,6 +70,7 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<UsuarioHub>("/hubs/users");
             });
         }
     }

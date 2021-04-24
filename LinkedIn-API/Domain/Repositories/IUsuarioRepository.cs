@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Domain.Repositories
 {
-    public interface IVagaRepository
+    public interface IUsuarioRepository
     {
-        List<Vaga> Listar();
+        List<Usuario> Listar();
     }
 }

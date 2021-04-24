@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(LinkedInContext))]
-    partial class LinkedInContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RadarContext))]
+    partial class RadarContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Domain.Entities.Vaga", b =>
+            modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,18 +28,21 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salario")
-                        .HasColumnType("decimal");
-
-                    b.Property<string>("Titulo")
+                    b.Property<string>("Geolocalização")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QtdEntregas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vagas");
+                    b.ToTable("Usuarios");
                 });
 #pragma warning restore 612, 618
         }
