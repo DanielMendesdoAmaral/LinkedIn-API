@@ -14,8 +14,6 @@ namespace Api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,22 +23,21 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+	        services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
+                });
+            });
+
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder
-                                        .WithOrigins("http://localhost:3000")
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod();
-                                  });
             });
 
             services.AddDbContext<RadarContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -61,9 +58,9 @@ namespace Api
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseCors("ClientPermission");
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseRouting();
 
             app.UseAuthorization();
 

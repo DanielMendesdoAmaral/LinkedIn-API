@@ -8,15 +8,19 @@ using System.Threading.Tasks;
 
 namespace Api.Hubs
 {
+    //Um Hub define métodos que serão chamados por clientes conectados ao servidor. 
     public class UsuarioHub : Hub<IUsuarioClient>
     {
-        public async Task Get([FromServices] ListarUsuariosHandler handler)
+        //O método Get será chamado por um cliente.
+        public async Task Get()
         {
+            
             var query = new ListarUsuariosRequest();
 
-            var result = (GenericQueryResult)handler.Handle(query);
+            //var result = (GenericQueryResult) handler.Handle(query);
 
-            await Clients.All.ReceberDados(result);
+            //O método ReceberDados será enviado a todos os clientes a partir da chamada do Get por um ou mais clientes.
+            //await Clients.All.ReceberDados(result);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Api.Controllers
         {
             var query = new ListarUsuariosRequest();
 
-            return QueryResult( (GenericQueryResult) handler.Handle(query));
+            return Result( (GenericQueryResult) handler.Handle(query));
         }
     }
 }
