@@ -23,7 +23,7 @@ namespace Domain.Handlers.Queries.UsuarioHandlers
             {
                 var result = _usuarioRepository
                              .Listar()
-                             .Select(u => new ListarUsuariosResult(u.Id, u.DataCriacao, u.Nome, u.Email, u.Geolocalização, u.QtdEntregas));
+                             .Select(u => new ListarUsuariosResult(u.Id, u.DataCriacao, u.Nome, u.Email, u.Latitude, u.Longitude, u.QtdEntregas));
 
                 return new GenericQueryResult(200, null, result);
             }

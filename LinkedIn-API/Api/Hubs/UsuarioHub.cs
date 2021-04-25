@@ -1,9 +1,8 @@
 ﻿using Api.Hubs.Clients;
-using Domain.Handlers.Queries.UsuarioHandlers;
-using Domain.Queries.UsuarioQueries.Requests;
-using Microsoft.AspNetCore.Mvc;
+using Domain.Commands.UsuarioCommands.Requests;
+using Domain.Handlers.Commands.UsuarioHandlers;
 using Microsoft.AspNetCore.SignalR;
-using Shared.Queries;
+using Shared.Commands;
 using System.Threading.Tasks;
 
 namespace Api.Hubs
@@ -11,16 +10,20 @@ namespace Api.Hubs
     //Um Hub define métodos que serão chamados por clientes conectados ao servidor. 
     public class UsuarioHub : Hub<IUsuarioClient>
     {
-        //O método Get será chamado por um cliente.
-        public async Task Get()
+        private readonly MudarLocalizacaoHandler _mudarLocalizacaoHandler;
+
+        public UsuarioHub(MudarLocalizacaoHandler mudarLocalizacaoHandler)
         {
-            
-            var query = new ListarUsuariosRequest();
+            _mudarLocalizacaoHandler = mudarLocalizacaoHandler;
+        }
 
-            //var result = (GenericQueryResult) handler.Handle(query);
+        //O método MudarLocalizacao será chamado por um cliente.
+        public async Task MudarLocalizacao(MudarLocalizacaoRequest command)
+        {
+            var result = (GenericCommandResult) _mudarLocalizacaoHandler.Handle(command);
 
-            //O método ReceberDados será enviado a todos os clientes a partir da chamada do Get por um ou mais clientes.
-            //await Clients.All.ReceberDados(result);
+            //O método ReceberLocalizacao será enviado a todos os clientes a partir da chamada do Get por um ou mais clientes.
+            await Clients.All.ReceberLocalizacao(result);
         }
     }
 }

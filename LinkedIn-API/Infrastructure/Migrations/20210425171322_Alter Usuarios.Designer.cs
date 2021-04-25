@@ -4,14 +4,16 @@ using Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(RadarContext))]
-    partial class RadarContextModelSnapshot : ModelSnapshot
+    [Migration("20210425171322_Alter Usuarios")]
+    partial class AlterUsuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,11 +33,11 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("DECIMAL");
+                    b.Property<int>("Latitude")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("DECIMAL");
+                    b.Property<int>("Longitude")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");

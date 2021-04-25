@@ -1,4 +1,5 @@
 using Api.Hubs;
+using Domain.Handlers.Commands.UsuarioHandlers;
 using Domain.Handlers.Queries.UsuarioHandlers;
 using Domain.Repositories;
 using Infrastructure.Data.Context;
@@ -45,6 +46,8 @@ namespace Api
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             services.AddTransient<ListarUsuariosHandler, ListarUsuariosHandler>();
+
+            services.AddTransient<MudarLocalizacaoHandler, MudarLocalizacaoHandler>();
 
             services.AddSignalR();
         }
