@@ -1,1 +1,1 @@
-# Linkedin-API
+Projeto de estudos de aplicações real-time.
